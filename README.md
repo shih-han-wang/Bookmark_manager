@@ -28,3 +28,15 @@ We fixed the `spec_helper.rb`, because it couldn't reach the `app.rb` file.
 
 We decided to hardcode the bookmarks into the `Bookmark` class. We called on the class in the `app.rb` file, saving it as an instance variable, and then calling on these instance variables in the `index.erb` file.
 The result is a website that lists the pages.
+
+
+#### Setting up a database, creating first table, manipulating table data
+
+We first ran `brew install postgresql` to install PostgreSQL, a relational database.
+
+`$ psql` enters into PostgreSQL, and from there we can use the cheatsheet to navigate and manipulate databases from the terminal:
+https://blog.jasonmeridth.com/posts/postgresql-command-line-cheat-sheet/
+
+http://www.cheat-sheets.org/sites/sql.su/
+
+`\q` quits back to the terminal.

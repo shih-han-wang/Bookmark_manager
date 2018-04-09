@@ -13,3 +13,18 @@ First user story:
   -----------|-----------
   Person |
   Bookmark Manager | list bookmarks
+
+#### Setting up a web project
+
+In a new git repo, run `bundle init` to create a new Gemfile. Inside the Gemfile, we entered a bunch of core gems that we usually use on top of Capybara, Rspec and Sinatra.
+`bundle install` will install the gems.
+`rspec --init` creates the base RSpec files.
+We filled in the spec_helper file with the relevant `require`s.
+We created a `config.ru` file and required our `app.rb`, as well as running the the app.
+We created a `.gitignore` to ignore the coverage data.
+
+```
+def testmethod
+  puts "This is code"
+end
+```

@@ -6,8 +6,10 @@ class Bookmark
     @list = []
   end
 
-  def all
-    @list
+  def self.all
+    ["www.google.co.uk",
+    "www.speedhunters.com",
+    "www.facebook.com"]
   end
 
 end

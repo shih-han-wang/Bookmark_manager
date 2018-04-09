@@ -6,9 +6,9 @@ describe Bookmark do
     expect(subject.list).to eq []
   end
 
-  describe '#all' do
-    it 'Should return the list array' do
-      expect(subject.all).to eq []
+  describe '#self.all' do
+    it 'Should return the hardcoded bookmark array' do
+      expect(Bookmark.all).to eq ["www.google.co.uk", "www.speedhunters.com", "www.facebook.com"]
     end
   end
 

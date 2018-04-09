@@ -15,6 +15,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   # Want a nice code coverage website? Uncomment this next line!
   # SimpleCov::Formatter::HTMLFormatter
 ])
+SimpleCov.start
 
 RSpec.configure do |config|
 

@@ -25,3 +25,6 @@ We created a `.gitignore` to ignore the coverage data.
 We created a `app.rb` file and created app class.
 We created `bookmark_spec.rb` for `all` method, and implemented into `bookmark.rb`.
 We fixed the `spec_helper.rb`, because it couldn't reach the `app.rb` file.
+
+We decided to hardcode the bookmarks into the `Bookmark` class. We called on the class in the `app.rb` file, saving it as an instance variable, and then calling on these instance variables in the `index.erb` file.
+The result is a website that lists the pages.

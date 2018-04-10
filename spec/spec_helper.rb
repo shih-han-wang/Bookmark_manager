@@ -21,6 +21,9 @@ SimpleCov.start
 
 RSpec.configure do |config|
 
+  con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
+  con.exec "TRUNCATE TABLE bookmarks"
+
   config.expect_with :rspec do |expectations|
 
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

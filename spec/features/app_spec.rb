@@ -6,3 +6,12 @@ feature "show all the hardcoded bookmarks" do
     expect(page).to have_content("http://destroyallsoftware.com")
   end
 end
+
+feature "create a new bookmark" do
+  scenario 'display bookmarks' do
+    visit '/bookmarks/new'
+    fill_in('url', :with => 'this is new bookmark')
+    find_button('Submit').click
+    expect(page).to have_content('this is new bookmark')
+  end
+end

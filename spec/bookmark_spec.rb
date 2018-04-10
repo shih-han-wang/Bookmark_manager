@@ -8,7 +8,7 @@ describe Bookmark do
 
   describe '#self.all' do
     it 'Should return the hardcoded bookmark array' do
-      expect(Bookmark.all).to eq ["www.google.co.uk", "www.speedhunters.com", "www.facebook.com"]
+      expect(Bookmark.all).to eq ["http://makersacademy.com", "http://google.com", "http://destroyallsoftware.com"]
     end
   end
 

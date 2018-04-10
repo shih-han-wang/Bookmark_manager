@@ -18,9 +18,13 @@ describe Bookmark do
   end
 
   describe '#self.create' do
-    it 'Should create a new bookmark into bookmarks table' do
-      Bookmark.create(url: 'this is testing')
-      expect(Bookmark.all).to include 'this is testing'
+    it 'Should create a new bookmark into bookmarks table if the url is valid' do
+      Bookmark.create(url: 'http://facebook.com')
+      expect(Bookmark.all).to include 'http://facebook.com'
+    end
+
+    it 'Should raise error if the url is valid' do
+      expect(Bookmark.create(url: 'this is not a valid url') ).to eq false
     end
   end
 

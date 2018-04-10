@@ -22,7 +22,7 @@ SimpleCov.start
 RSpec.configure do |config|
 
   con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
-  con.exec "TRUNCATE TABLE bookmarks"
+  con.exec "TRUNCATE TABLE bookmarks RESTART IDENTITY"
 
   config.expect_with :rspec do |expectations|
 

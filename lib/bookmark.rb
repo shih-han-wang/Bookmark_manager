@@ -1,4 +1,5 @@
 require 'pg'
+require 'uri'
 
 class Bookmark
 
@@ -16,7 +17,10 @@ class Bookmark
       con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
     end
 
+    return false unless options[:url] =~ URI::regexp
+
     con.exec "INSERT INTO bookmarks (url) VALUES ('#{options[:url]}')"
+
   end
 
   def self.all

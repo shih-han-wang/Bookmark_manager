@@ -8,10 +8,19 @@ feature "show all the hardcoded bookmarks" do
 end
 
 feature "create a new bookmark" do
-  scenario 'display bookmarks' do
+  scenario 'add a new bookmark with valid url and display bookmarks' do
     visit '/bookmarks/new'
-    fill_in('url', :with => 'this is new bookmark')
+    fill_in('url', :with => 'http://instagram.com')
     find_button('Submit').click
-    expect(page).to have_content('this is new bookmark')
+    expect(page).to have_content('http://instagram.com')
   end
+
+  scenario 'add a new bookmark with unvalid url' do
+    visit '/bookmarks/new'
+    fill_in('url', :with => 'unvalid url')
+    find_button('Submit').click
+    expect(page).not_to have_content('unvalid url')
+    expect(page).to have_content('You must submit a valid URL')
+  end
+
 end

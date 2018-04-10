@@ -2,10 +2,21 @@ require 'pg'
 
 class Bookmark
 
-  attr_accessor :list
+  # attr_accessor :list
+  #
+  # def initialize
+  #   @list = []
+  # end
 
-  def initialize
-    @list = []
+  def self.create(options)
+
+    if ENV['ENVIRONMENT'] == 'test'
+      con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
+    else
+      con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
+    end
+
+    con.exec "INSERT INTO bookmarks (url) VALUES ('#{options[:url]}')"
   end
 
   def self.all

@@ -17,11 +17,11 @@ describe Bookmark do
     end
   end
 
-  # describe '#self.create' do
-  #   it 'Should create a new bookmark into bookmarks table' do
-  #     Bookmark.create('this is testing')
-  #     expect(Bookmark.all).to include 'this is testing'
-  #   end
-  # end
+  describe '#self.create' do
+    it 'Should create a new bookmark into bookmarks table' do
+      Bookmark.create(url: 'this is testing')
+      expect(Bookmark.all).to include 'this is testing'
+    end
+  end
 
 end

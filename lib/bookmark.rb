@@ -16,8 +16,6 @@ class Bookmark
 
     @duplicate = false
 
-
-
     if ENV['ENVIRONMENT'] == 'test'
       con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
     else
@@ -25,10 +23,6 @@ class Bookmark
     end
 
     rows = con.exec "SELECT * from bookmarks"
-
-
-
-
 
     if rows.column_values(1).include?(options[:url])
 
@@ -44,27 +38,6 @@ class Bookmark
       con.exec "INSERT INTO bookmarks (url, title) VALUES ('#{@bookmark.url}', '#{@bookmark.title}')"
 
     end
-    #
-    # def self.update(options)
-    #   con.exec "UPDATE bookmarks SET title = '#{options[:title]}' WHERE url = '#{options[:url]}';"
-    # end
-
-
-
-
-
-
-
-
-
-
-
-
-    # return false unless options[:url] =~ URI::regexp
-    #
-    # @bookmark = Bookmark.new(options)
-    #
-    # con.exec "INSERT INTO bookmarks (url, title) VALUES ('#{@bookmark.url}', '#{@bookmark.title}')"
 
   end
 
@@ -77,14 +50,12 @@ class Bookmark
     end
 
     rs = con.exec 'SELECT * FROM bookmarks'
-    rs.map{|bookmark| bookmark['title']}
+    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a>" }
 
   end
 
   def self.duplicate
-
     @duplicate
-
   end
 
   def self.instance

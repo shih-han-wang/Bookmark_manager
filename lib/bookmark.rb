@@ -3,11 +3,12 @@ require 'uri'
 
 class Bookmark
 
-  # attr_accessor :list
-  #
-  # def initialize
-  #   @list = []
-  # end
+  attr_accessor :title, :url
+
+  def initialize(options)
+    @title = options[:title]
+    @url = options[:url]
+  end
 
   def self.create(options)
 
@@ -19,7 +20,9 @@ class Bookmark
 
     return false unless options[:url] =~ URI::regexp
 
-    con.exec "INSERT INTO bookmarks (url) VALUES ('#{options[:url]}')"
+    @bookmark = Bookmark.new(options)
+
+    con.exec "INSERT INTO bookmarks (url, title) VALUES ('#{@bookmark.url}', '#{@bookmark.title}')"
 
   end
 
@@ -34,6 +37,10 @@ class Bookmark
     rs = con.exec 'SELECT * FROM bookmarks'
     rs.map{|bookmark| bookmark['url']}
 
+  end
+
+  def self.instance
+    @bookmark
   end
 
 end

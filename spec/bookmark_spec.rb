@@ -26,6 +26,12 @@ describe Bookmark do
     it 'Should raise error if the url is valid' do
       expect(Bookmark.create(url: 'this is not a valid url') ).to eq false
     end
+
+    it 'Should return the title of the bookmark' do
+
+      Bookmark.create(url: 'http://facebook.com', title: 'Facebook')
+      expect(Bookmark.instance.title).to eq 'Facebook'
+    end
   end
 
 end

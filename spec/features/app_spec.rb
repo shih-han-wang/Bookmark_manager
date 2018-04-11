@@ -39,4 +39,11 @@ feature "create a new bookmark" do
     expect(page).to have_content('That bookmark has already been added, title update')
   end
 
+  feature 'deleting bookmarks' do
+    it 'the user is presented with a button to delete a bookmark' do
+      visit '/bookmarks'
+      expect(page).to have_button('Delete')
+    end
+  end
+
 end

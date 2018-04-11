@@ -50,7 +50,7 @@ class Bookmark
     end
 
     rs = con.exec 'SELECT * FROM bookmarks'
-    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a>" }
+    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=Delete value=Delete bookmark>" }
 
   end
 
@@ -60,6 +60,9 @@ class Bookmark
 
   def self.instance
     @bookmark
+  end
+
+  def self.delete(options)
   end
 
 end

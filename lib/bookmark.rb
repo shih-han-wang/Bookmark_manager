@@ -50,7 +50,7 @@ class Bookmark
     end
 
     rs = con.exec 'SELECT * FROM bookmarks'
-    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=Delete id=#{bookmark['title']}>" }
+    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=Delete value=Delete id=#{bookmark['title']}>" }
 
   end
 
@@ -63,6 +63,15 @@ class Bookmark
   end
 
   def self.delete(options)
+
+    if ENV['ENVIRONMENT'] == 'test'
+      con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
+    else
+      con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
+    end
+
+    con.exec "DELETE FROM bookmarks WHERE url='#{@bookmark.url}';"
+
   end
 
 end

@@ -11,16 +11,16 @@ describe Bookmark do
       Bookmark.create(url: 'http://makersacademy.com', title: 'Makers Academy')
       Bookmark.create(url: 'http://google.com', title: 'Google')
       Bookmark.create(url: 'http://destroyallsoftware.com', title: 'Destroy All Software')
-      expect(Bookmark.all).to include 'Makers Academy'
-      expect(Bookmark.all).to include 'Google'
-      expect(Bookmark.all).to include 'Destroy All Software'
+      expect(Bookmark.all).to include "<a href = http://makersacademy.com>Makers Academy</a>"
+      expect(Bookmark.all).to include "<a href = http://google.com>Google</a>"
+      expect(Bookmark.all).to include "<a href = http://destroyallsoftware.com>Destroy All Software</a>"
     end
   end
 
   describe '#self.create' do
     it 'Should create a new bookmark into bookmarks table if the url is valid' do
       Bookmark.create(url: 'http://facebook.com', title: 'Facebook')
-      expect(Bookmark.all).to include 'Facebook'
+      expect(Bookmark.all).to include "<a href = http://facebook.com>Facebook</a>"
     end
 
     it 'Should raise error if the url is valid' do
@@ -29,8 +29,8 @@ describe Bookmark do
 
     it 'Should return the title of the bookmark' do
 
-      Bookmark.create(url: 'http://facebook.com', title: 'Facebook')
-      expect(Bookmark.instance.title).to eq 'Facebook'
+      Bookmark.create(url: 'http://apple.com', title: 'Apple')
+      expect(Bookmark.instance.title).to eq 'Apple'
     end
   end
 

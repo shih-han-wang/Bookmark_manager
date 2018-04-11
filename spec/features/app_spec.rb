@@ -29,16 +29,14 @@ feature "create a new bookmark" do
 
   scenario 'user cannot add a duplicate bookmark' do
     visit '/bookmarks/new'
-    fill_in('url', :with => 'http://instagram.com')
-    fill_in('title', :with => 'Instagram')
+    fill_in('url', :with => 'http://youtube.com')
+    fill_in('title', :with => 'youtube')
     find_button('Submit').click
     find_button('Creat New Bookmarks').click
-    fill_in('url', :with => 'http://instagram.com')
-    fill_in('title', :with => 'Instagram')
+    fill_in('url', :with => 'http://youtube.com')
+    fill_in('title', :with => 'youtube2')
     find_button('Submit').click
-    expect(page).to have_content('This bookmark has already been added')
-
-
+    expect(page).to have_content('That bookmark has already been added, title update')
   end
 
 end

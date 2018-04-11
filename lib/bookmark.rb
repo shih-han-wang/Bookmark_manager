@@ -35,7 +35,7 @@ class Bookmark
     end
 
     rs = con.exec 'SELECT * FROM bookmarks'
-    rs.map{|bookmark| bookmark['url']}
+    rs.map{|bookmark| bookmark['title']}
 
   end
 

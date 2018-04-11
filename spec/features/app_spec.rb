@@ -1,9 +1,7 @@
 feature "show all the hardcoded bookmarks" do
   scenario 'display bookmarks' do
     visit '/bookmarks'
-    expect(page).to have_content("http://makersacademy.com")
-    expect(page).to have_content("http://google.com")
-    expect(page).to have_content("http://destroyallsoftware.com")
+    expect(page).to have_content("Makers Academy")
   end
 end
 
@@ -11,8 +9,9 @@ feature "create a new bookmark" do
   scenario 'add a new bookmark with valid url and display bookmarks' do
     visit '/bookmarks/new'
     fill_in('url', :with => 'http://instagram.com')
+    fill_in('title', :with => 'Instagram')
     find_button('Submit').click
-    expect(page).to have_content('http://instagram.com')
+    expect(page).to have_content('Instagram')
   end
 
   scenario 'add a new bookmark with unvalid url' do
@@ -21,6 +20,11 @@ feature "create a new bookmark" do
     find_button('Submit').click
     expect(page).not_to have_content('unvalid url')
     expect(page).to have_content('You must submit a valid URL')
+  end
+
+  scenario 'add a title and display' do
+    visit '/bookmarks/new'
+    expect(page).to have_field('title')
   end
 
 end

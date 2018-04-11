@@ -37,12 +37,27 @@ feature "create a new bookmark" do
     fill_in('title', :with => 'youtube2')
     find_button('Submit').click
     expect(page).to have_content('That bookmark has already been added, title update')
+
   end
 
   feature 'deleting bookmarks' do
     it 'the user is presented with a button to delete a bookmark' do
-      visit '/bookmarks'
-      expect(page).to have_button('Delete')
+      visit '/bookmarks/new'
+      fill_in('url', :with => 'http://netflix.com')
+      fill_in('title', :with => 'Netflix')
+      find_button('Submit').click
+      expect(page).to have_button('Netflix')
+
+    end
+
+    it 'the user deletes a bookmark and it is no longer displayed' do
+      visit '/bookmarks/new'
+      fill_in('url', :with => 'http://netflix.com')
+      fill_in('title', :with => 'Netflix')
+      find_button('Submit').click
+      find_button('Netflix').click
+      # expect(page).to have_no_button('Netflix')
+      expect(page).not_to have_selector "Netflix"
     end
   end
 

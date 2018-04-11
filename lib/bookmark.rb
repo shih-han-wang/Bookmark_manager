@@ -4,13 +4,17 @@ require 'uri'
 class Bookmark
 
   attr_accessor :title, :url
+  attr_reader :duplicate
 
   def initialize(options)
     @title = options[:title]
     @url = options[:url]
+
   end
 
   def self.create(options)
+
+    @duplicate = false
 
 
 
@@ -29,6 +33,7 @@ class Bookmark
     if rows.column_values(1).include?(options[:url])
 
       con.exec "UPDATE bookmarks SET title = '#{options[:title]}' WHERE url = '#{options[:url]}';"
+      @duplicate = true
 
     else
 
@@ -39,6 +44,10 @@ class Bookmark
       con.exec "INSERT INTO bookmarks (url, title) VALUES ('#{@bookmark.url}', '#{@bookmark.title}')"
 
     end
+    #
+    # def self.update(options)
+    #   con.exec "UPDATE bookmarks SET title = '#{options[:title]}' WHERE url = '#{options[:url]}';"
+    # end
 
 
 
@@ -69,6 +78,12 @@ class Bookmark
 
     rs = con.exec 'SELECT * FROM bookmarks'
     rs.map{|bookmark| bookmark['title']}
+
+  end
+
+  def self.duplicate
+
+    @duplicate
 
   end
 

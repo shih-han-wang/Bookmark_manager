@@ -2,6 +2,7 @@ require 'sinatra'
 require './lib/bookmark.rb'
 require 'sinatra/flash'
 
+
 class Bookmark_Manager < Sinatra::Base
 
   register Sinatra::Flash
@@ -13,13 +14,15 @@ class Bookmark_Manager < Sinatra::Base
 
   post '/bookmarks' do
     flash[:notice] = 'You must submit a valid URL' unless Bookmark.create(url: params[:url], title: params[:title])
-    flash[:duplicate] = 'That bookmark has already been added' unless Bookmark.create(url: params[:url], title: params[:title])
+
+    flash[:duplicate] = 'That bookmark has already been added, title update' if Bookmark.duplicate
 
     redirect to ('/bookmarks')
   end
 
   get '/bookmarks' do
    "#{flash[:notice]}" if flash[:notice]
+   "#{flash[:duplicate]}" if flash[:duplicate]
    @bookmark = Bookmark.all
    erb :index
  end

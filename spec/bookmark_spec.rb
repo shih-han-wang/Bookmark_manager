@@ -34,4 +34,10 @@ describe Bookmark do
     end
   end
 
+  it 'Should return the URL of the bookmark' do
+
+    Bookmark.create(url: 'http://facebook.com', title: 'Facebook')
+    expect(Bookmark.instance.url).to eq 'http://facebook.com'
+  end
+
 end

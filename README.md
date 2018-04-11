@@ -40,3 +40,10 @@ https://blog.jasonmeridth.com/posts/postgresql-command-line-cheat-sheet/
 http://www.cheat-sheets.org/sites/sql.su/
 
 `\q` quits back to the terminal.
+
+
+#### TO DO: ####
+
+When updating bookmarks, URL needs to show on page
+Look into bug where bookmark shows as repeat even though its not
+Need to investigate adding and deleting bookmarks with no title/URL

@@ -1,9 +1,9 @@
+
+
+<form action='/bookmarks/delete' method='post'>
 <%=@bookmark.join("<br>")%>
+</form>
 
-
-
-
-<br>
 
 <% flash.keys.each do |type| %>
   <div data-alert class="flash <%= type %> alert-box radius">

@@ -47,7 +47,7 @@ describe Bookmark do
 
     it 'Should let user be able to delete the bookmark' do
       Bookmark.create(url: 'http://wikipedia.com', title: 'Wikipedia')
-      Bookmark.delete(url: 'http://wikipedia.com')
+      Bookmark.delete('Wikipedia')
       expect(Bookmark.all.to_s).not_to include "<a href = http://wikipedia.com>Wikipedia</a>"
     end
   end

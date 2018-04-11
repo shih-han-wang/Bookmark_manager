@@ -26,7 +26,7 @@ class Bookmark
 
     if rows.column_values(1).include?(options[:url])
 
-      con.exec "UPDATE bookmarks SET title = '#{options[:title]}' WHERE url = '#{options[:url]}';"
+      con.exec "UPDATE bookmarks SET title = '#{options[:title].rstrip!}' WHERE url = '#{options[:url]}';"
       @duplicate = true
 
     else
@@ -50,7 +50,7 @@ class Bookmark
     end
 
     rs = con.exec 'SELECT * FROM bookmarks'
-    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=Delete value=Delete id=#{bookmark['title']}>" }
+    rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=delete value='Delete #{bookmark['title']}'>" }
 
   end
 
@@ -70,7 +70,8 @@ class Bookmark
       con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
     end
 
-    con.exec "DELETE FROM bookmarks WHERE url='#{@bookmark.url}';"
+
+    con.exec "DELETE FROM bookmarks WHERE title='#{options}';"
 
   end
 

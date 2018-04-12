@@ -13,7 +13,8 @@ class Bookmark_Manager < Sinatra::Base
   end
 
   post '/bookmarks' do
-    flash[:notice] = 'You must submit a valid URL' unless Bookmark.create(url: params[:url], title: params[:title])
+
+    flash[:notice] = 'You must submit a valid URL' unless Bookmark.create(url: params[:url], title: params[:title].rstrip)
 
     flash[:duplicate] = 'That bookmark has already been added, title update' if Bookmark.duplicate
 

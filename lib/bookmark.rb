@@ -1,6 +1,6 @@
 require 'pg'
 require 'uri'
-require 'database'
+require_relative './database.rb'
 
 class Bookmark
 
@@ -10,7 +10,6 @@ class Bookmark
   def initialize(options)
     @title = options[:title]
     @url = options[:url]
-
   end
 
   def self.create(options)
@@ -20,7 +19,7 @@ class Bookmark
 
     if rows.column_values(1).include?(options[:url])
 
-      con.exec "UPDATE bookmarks SET title = '#{options[:title].rstrip!}' WHERE url = '#{options[:url]}';"
+      con.exec "UPDATE bookmarks SET title = '#{options[:title]}' WHERE url = '#{options[:url]}';"
       @duplicate = true
 
     else
@@ -38,14 +37,13 @@ class Bookmark
   def self.all
 
     con = Database::connect
-
     rs = con.exec 'SELECT * FROM bookmarks'
     rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=delete value='Delete #{bookmark['title']}'>" }
 
   end
 
   def self.duplicate
-    @duplicate
+    @duplicate == true
   end
 
   def self.instance

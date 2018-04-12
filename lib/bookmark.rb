@@ -1,5 +1,6 @@
 require 'pg'
 require 'uri'
+require 'database'
 
 class Bookmark
 
@@ -14,14 +15,7 @@ class Bookmark
 
   def self.create(options)
 
-    @duplicate = false
-
-    if ENV['ENVIRONMENT'] == 'test'
-      con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
-    else
-      con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
-    end
-
+    con = Database::connect
     rows = con.exec "SELECT * from bookmarks"
 
     if rows.column_values(1).include?(options[:url])
@@ -43,11 +37,7 @@ class Bookmark
 
   def self.all
 
-    if ENV['ENVIRONMENT'] == 'test'
-      con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
-    else
-      con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
-    end
+    con = Database::connect
 
     rs = con.exec 'SELECT * FROM bookmarks'
     rs.map{|bookmark| "<a href = #{bookmark['url']}>#{bookmark['title']}</a><input type=submit name=delete value='Delete #{bookmark['title']}'>" }
@@ -63,16 +53,8 @@ class Bookmark
   end
 
   def self.delete(options)
-
-    if ENV['ENVIRONMENT'] == 'test'
-      con = PG.connect :dbname => 'bookmark_manager_test', :user => 'shihhanwang'
-    else
-      con = PG.connect :dbname => 'bookmark_manager', :user => 'shihhanwang'
-    end
-
-
+    con = Database::connect
     con.exec "DELETE FROM bookmarks WHERE title='#{options}';"
-
   end
 
 end

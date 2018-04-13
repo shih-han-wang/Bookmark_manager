@@ -18,21 +18,16 @@ class Bookmark_Manager < Sinatra::Base
 
     flash[:duplicate] = 'That bookmark has already been added, title update' if Bookmark.duplicate
 
-    p params
-
     redirect to ('/bookmarks')
   end
 
   post '/bookmarks/delete' do
-    p params
     Bookmark.delete(params[:delete].gsub!(/^Delete /, '').rstrip)
     redirect to ('/bookmarks')
   end
 
   get '/bookmarks' do
-   "#{flash[:notice]}" if flash[:notice]
-   "#{flash[:duplicate]}" if flash[:duplicate]
-   @bookmark = Bookmark.all
+   @bookmarks = Bookmark.all
    erb :index
  end
 

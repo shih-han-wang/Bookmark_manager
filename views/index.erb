@@ -1,8 +1,14 @@
-
-
-<form action='/bookmarks/delete' method='post'>
-<%=@bookmark.join("<br>")%>
-</form>
+<ul>
+  <% @bookmarks.each do |bookmark|%>
+    <li><a href="<%=bookmark.url%>"><%= bookmark.title%></a>
+      <div>
+        <form action='/bookmarks/delete' method='post'>
+        <input type=submit name=delete value='Delete <%=bookmark.title%>'>
+        </form>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 
 <% flash.keys.each do |type| %>

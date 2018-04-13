@@ -1,0 +1,10 @@
+<% if @result == false %>
+<h1>Bookmark not found</h1>
+<% else %>
+<ul>
+  <% @result.each do |bookmark|%>
+    <li><a href="<%=bookmark['url']%>"><%= bookmark['title']%></a>
+    </li>
+  <% end %>
+</ul>
+<% end %>

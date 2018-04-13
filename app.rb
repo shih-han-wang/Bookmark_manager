@@ -36,5 +36,10 @@ class Bookmark_Manager < Sinatra::Base
     erb :new_bookmark
   end
 
+  get '/find' do
+    @result = Bookmark.find(params[:bookmark_name])
+    erb :find
+  end
+
   run! if app_file == $0
 end

@@ -32,7 +32,7 @@ class Bookmark
 
   def self.all
     con = Database::connect
-    con.exec('SELECT * FROM bookmarks').map do |bookmark| Bookmark.new(title: bookmark['title'], url: bookmark['url'], id: bookmark['url'])
+    con.exec('SELECT * FROM bookmarks').map do |bookmark| Bookmark.new(title: bookmark['title'], url: bookmark['url'], id: bookmark['id'])
     end
   end
 
@@ -40,9 +40,9 @@ class Bookmark
     @duplicate == true
   end
 
-  def self.delete(options)
+  def self.delete(id)
     con = Database::connect
-    con.exec "DELETE FROM bookmarks WHERE title='#{options}';"
+    con.exec "DELETE FROM bookmarks WHERE id='#{id}';"
   end
 
 end

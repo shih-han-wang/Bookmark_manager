@@ -3,6 +3,7 @@
     <li><a href="<%=bookmark.url%>"><%= bookmark.title%></a>
       <div>
         <form action='/bookmarks/delete' method='post'>
+        <input type='hidden' name=id value='<%=bookmark.id%>' >
         <input type=submit name=delete value='Delete <%=bookmark.title%>'>
         </form>
       </div>
